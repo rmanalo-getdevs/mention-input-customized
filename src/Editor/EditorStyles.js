@@ -10,7 +10,8 @@ export default StyleSheet.create({
   },
   textContainer: {
     alignSelf: "stretch",
-    position: "relative"
+    position: "relative",
+    height: "100%"
   },
   input: {
     fontSize: 14,
@@ -22,14 +23,16 @@ export default StyleSheet.create({
     top: 0,
     color: "transparent",
     alignSelf: "stretch",
-    width: "100%"
+    width: "100%",
+    height: "100%"
   },
   formmatedTextWrapper: {
     position: "absolute",
     top: 0,
     paddingHorizontal: 20,
     paddingVertical: 5,
-    width: "100%"
+    width: "100%",
+    height: "100%"
   },
   formmatedText: {
     fontSize: 16,
