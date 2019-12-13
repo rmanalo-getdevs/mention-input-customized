@@ -12,14 +12,13 @@ export default StyleSheet.create({
     height: 30,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderColor: "rgba(0, 0, 0, 0.2)"
+    borderColor: "rgba(0, 0, 0, 0.1)"
   },
   text: {
-    alignSelf: "center",
-    marginLeft: 12
+    alignSelf: "center"
   },
   title: {
-    fontSize: 14,
+    fontSize: 13,
     color: "rgba(0, 0, 0, 0.8)"
   },
   thumbnailWrapper: {
