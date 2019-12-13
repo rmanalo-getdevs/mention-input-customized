@@ -61,7 +61,7 @@ export class Editor extends React.Component {
       showMentions: false,
       editorHeight: 72,
       scrollContentInset: { top: 0, bottom: 0, left: 0, right: 0 },
-      placeholder: props.placeholder || "Type something..."
+      placeholder: props.placeholder || ""
     };
     this.isTrackingStarted = false;
     this.previousChar = " ";
@@ -149,21 +149,22 @@ export class Editor extends React.Component {
      * according to what user type with
      * @ char e.g. @billroy
      */
+    const transformInpt = inputText.toUpperCase();
     if (this.isTrackingStarted) {
       let pattern = null;
       if (this.state.triggerLocation === "new-word-only") {
         pattern = new RegExp(
-          `\\B${this.state.trigger}[aA-zZ0-9_-]+|\\B${this.state.trigger}`,
+          `\\B${this.state.trigger}[a-z0-9_-]+|\\B${this.state.trigger}`,
           `gi`
         );
       } else {
         //anywhere
         pattern = new RegExp(
-          `\\${this.state.trigger}[aA-zZ0-9_-]+|\\${this.state.trigger}`,
+          `\\${this.state.trigger}[a-z0-9_-]+|\\${this.state.trigger}`,
           `i`
         );
       }
-      const str = inputText.substr(this.menIndex);
+      const str = transformInpt.substr(this.menIndex);
       const keywordArray = str.match(pattern);
       if (keywordArray && !!keywordArray.length) {
         const lastKeyword = keywordArray[keywordArray.length - 1];
