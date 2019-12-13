@@ -5,7 +5,8 @@ export default StyleSheet.create({
     backgroundColor: "#fff",
     borderColor: "green",
     borderWidth: 1,
-    width: 300
+    width: "100%",
+    height: "100%"
   },
   textContainer: {
     alignSelf: "stretch",
