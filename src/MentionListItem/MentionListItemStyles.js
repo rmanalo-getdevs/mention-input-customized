@@ -12,8 +12,8 @@ export default StyleSheet.create({
     height: 25,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderColor: "rgba(0, 0, 0, 0.8)",
-    padding: 4
+    borderColor: "rgba(0, 0, 0, 0.5)",
+    padding: 10
   },
   text: {
     alignSelf: "center",
