@@ -9,7 +9,7 @@ export default StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     color: "rgba(0, 0, 0, 0.1)",
-    height: 50,
+    height: 25,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
     borderColor: "rgba(0, 0, 0, 0.05)"
@@ -19,7 +19,7 @@ export default StyleSheet.create({
     marginLeft: 12
   },
   title: {
-    fontSize: 16,
+    fontSize: 12,
     color: "rgba(0, 0, 0, 0.8)"
   },
   thumbnailWrapper: {
