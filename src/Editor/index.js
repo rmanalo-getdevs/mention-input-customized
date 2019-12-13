@@ -149,7 +149,6 @@ export class Editor extends React.Component {
      * according to what user type with
      * @ char e.g. @billroy
      */
-    const transformInpt = inputText.toUpperCase();
     if (this.isTrackingStarted) {
       let pattern = null;
       if (this.state.triggerLocation === "new-word-only") {
@@ -164,7 +163,7 @@ export class Editor extends React.Component {
           `i`
         );
       }
-      const str = transformInpt.substr(this.menIndex);
+      const str = inputText.substr(this.menIndex);
       const keywordArray = str.match(pattern);
       if (keywordArray && !!keywordArray.length) {
         const lastKeyword = keywordArray[keywordArray.length - 1];

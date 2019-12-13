@@ -1,6 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ActivityIndicator, FlatList, Animated, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Animated,
+  View,
+  Text
+} from "react-native";
 
 import MentionListItem from "../MentionListItem";
 // Styles
@@ -56,9 +62,16 @@ export class MentionList extends React.PureComponent {
           keyboardShouldPersistTaps={"always"}
           horizontal={false}
           ListEmptyComponent={
-            <View style={styles.loaderContainer}>
-              <ActivityIndicator />
-            </View>
+            <Text
+              style={{
+                fontSize: 13,
+                color: "#DCE0E0",
+                textAlign: "center",
+                padding: 4
+              }}
+            >
+              No Results Found
+            </Text>
           }
           enableEmptySections={true}
           data={suggestions}
