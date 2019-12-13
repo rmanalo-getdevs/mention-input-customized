@@ -21,7 +21,7 @@ export class MentionListItem extends React.PureComponent {
   };
 
   render() {
-    const { item: user, index, editorStyles, key } = this.props;
+    const { item: user, index, editorStyles, keyword } = this.props;
     return (
       <View>
         <TouchableOpacity
