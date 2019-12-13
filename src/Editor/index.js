@@ -39,7 +39,7 @@ export class Editor extends React.Component {
       this.mentionsMap = map;
       msg = newValue;
       formattedMsg = this.formatText(newValue);
-      setTimeout(()=>{
+      setTimeout(() => {
         this.sendMessageToFooter(newValue);
       });
     }
@@ -163,7 +163,7 @@ export class Editor extends React.Component {
           `i`
         );
       }
-      const str = inputText.substr(this.menIndex);
+      const str = inputText.toUpperCase().substr(this.menIndex);
       const keywordArray = str.match(pattern);
       if (keywordArray && !!keywordArray.length) {
         const lastKeyword = keywordArray[keywordArray.length - 1];
