@@ -10,9 +10,7 @@ export default StyleSheet.create({
   },
   textContainer: {
     alignSelf: "stretch",
-    position: "relative",
-    minHeight: 40,
-    maxHeight: 140
+    position: "relative"
   },
   input: {
     fontSize: 14,
