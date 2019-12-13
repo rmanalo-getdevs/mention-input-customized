@@ -14,7 +14,7 @@ export default StyleSheet.create({
     maxHeight: 140
   },
   input: {
-    fontSize: 16,
+    fontSize: 14,
     color: "#000",
     fontWeight: "400",
     paddingHorizontal: 20,
