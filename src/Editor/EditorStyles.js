@@ -17,7 +17,7 @@ export default StyleSheet.create({
     color: "#000",
     fontWeight: "400",
     paddingHorizontal: 20,
-    minHeight: 40,
+
     position: "absolute",
     top: 0,
     color: "transparent",
@@ -25,7 +25,6 @@ export default StyleSheet.create({
     width: "100%"
   },
   formmatedTextWrapper: {
-    minHeight: 40,
     position: "absolute",
     top: 0,
     paddingHorizontal: 20,
