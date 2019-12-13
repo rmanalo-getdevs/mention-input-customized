@@ -12,7 +12,7 @@ export default StyleSheet.create({
     height: 30,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderColor: "rgba(0, 0, 0, 0.0.9)"
+    borderColor: "#E7EAEA"
   },
   text: {
     alignSelf: "center"
