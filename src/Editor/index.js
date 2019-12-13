@@ -345,6 +345,7 @@ export class Editor extends React.Component {
   formatTextWithMentions(inputText) {
     if (inputText === "" || !this.mentionsMap.size) return inputText;
     let formattedText = "";
+    let extractHtmlText = "";
     let lastIndex = 0;
     this.mentionsMap.forEach((men, [start, end]) => {
       const initialStr =
@@ -352,6 +353,7 @@ export class Editor extends React.Component {
       lastIndex = end + 1;
       formattedText = formattedText.concat(initialStr);
       formattedText = formattedText.concat(`@[${men.username}](id:${men.id})`);
+
       if (
         EU.isKeysAreSame(EU.getLastKeyInMap(this.mentionsMap), [start, end])
       ) {
@@ -362,10 +364,38 @@ export class Editor extends React.Component {
     return formattedText;
   }
 
+  formatTextWithHTML(inputText) {
+    if (inputText === "" || !this.mentionsMap.size) return inputText;
+    let formattedText = "";
+    let extractHtmlText = "";
+    let lastIndex = 0;
+    this.mentionsMap.forEach((men, [start, end]) => {
+      const initialStr =
+        start === 1 ? "" : inputText.substring(lastIndex, start);
+      lastIndex = end + 1;
+      formattedText = formattedText.concat(initialStr);
+      formattedText = formattedText.concat(`@[${men.username}](id:${men.id})`);
+
+      extractHtmlText = extractHtmlText.concat(initialStr);
+      extractHtmlText = extractHtmlText.concat(
+        `<strong data-mention=\\“${men.id}\\“><font color=‘#1C89FE’><span style=‘color:#1c89fe’><a style=‘color:#1c89fe’ href=‘/connect/roster/${men.id}’>${men.username}</a></span></font></strong>`
+      );
+      if (
+        EU.isKeysAreSame(EU.getLastKeyInMap(this.mentionsMap), [start, end])
+      ) {
+        const lastStr = inputText.substr(lastIndex); //remaining string
+        formattedText = formattedText.concat(lastStr);
+        extractHtmlText = extractHtmlText.concat(lastStr);
+      }
+    });
+    return extractHtmlText;
+  }
+
   sendMessageToFooter(text) {
     this.props.onChange({
       displayText: text,
-      text: this.formatTextWithMentions(text)
+      text: this.formatTextWithMentions(text),
+      htmlText: this.formatTextWithHTML(text)
     });
   }
 
