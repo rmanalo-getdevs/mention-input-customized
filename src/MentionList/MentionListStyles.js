@@ -8,7 +8,7 @@ export default StyleSheet.create({
   suggestionsPanelStyle: {},
   loaderContainer: {},
   mentionsListContainer: {
-    height: 70,
+    height: 50,
     borderTopColor: "#c6d32e",
     borderTopWidth: 2
   }

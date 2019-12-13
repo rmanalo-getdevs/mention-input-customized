@@ -19,7 +19,7 @@ export default StyleSheet.create({
     marginLeft: 12
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     color: "rgba(0, 0, 0, 0.8)"
   },
   thumbnailWrapper: {
