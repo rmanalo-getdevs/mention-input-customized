@@ -26,7 +26,9 @@ export class Editor extends React.Component {
     onHideMentions: PropTypes.func,
     editorStyles: PropTypes.object,
     placeholder: PropTypes.string,
-    renderMentionList: PropTypes.func
+    renderMentionList: PropTypes.func,
+    onFocussetText: PropTypes.func,
+    onFocusisFocus: PropTypes.func
   };
 
   constructor(props) {
@@ -563,7 +565,6 @@ export class Editor extends React.Component {
                 ref={input => props.onRef && props.onRef(input)}
                 style={[styles.input, editorStyles.input]}
                 multiline
-                autoFocus
                 numberOfLines={100}
                 name={"message"}
                 value={state.inputText}
@@ -575,6 +576,10 @@ export class Editor extends React.Component {
                 placeholder={state.placeholder}
                 onContentSizeChange={this.onContentSizeChange}
                 scrollEnabled={false}
+                onFocus={() => {
+                  this.props.onFocusisFocus(true);
+                  this.props.onFocussetText("");
+                }}
               />
             </View>
           </ScrollView>
