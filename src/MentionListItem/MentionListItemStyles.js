@@ -12,11 +12,12 @@ export default StyleSheet.create({
     height: 25,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderColor: "#696969"
+    borderColor: "rgba(0, 0, 0, 0.08)"
   },
   text: {
     alignSelf: "center",
-    marginLeft: 12
+    marginLeft: 12,
+    padding: 5
   },
   title: {
     fontSize: 14,
