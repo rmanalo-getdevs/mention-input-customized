@@ -153,17 +153,17 @@ export class Editor extends React.Component {
       let pattern = null;
       if (this.state.triggerLocation === "new-word-only") {
         pattern = new RegExp(
-          `\\B${this.state.trigger}[a-z0-9_-]+|\\B${this.state.trigger}`,
+          `\\B${this.state.trigger}[aA-zZ0-9_-]+|\\B${this.state.trigger}`,
           `gi`
         );
       } else {
         //anywhere
         pattern = new RegExp(
-          `\\${this.state.trigger}[a-z0-9_-]+|\\${this.state.trigger}`,
+          `\\${this.state.trigger}[aA-zZ0-9_-]+|\\${this.state.trigger}`,
           `i`
         );
       }
-      const str = inputText.toUpperCase().substr(this.menIndex);
+      const str = inputText.substr(this.menIndex);
       const keywordArray = str.match(pattern);
       if (keywordArray && !!keywordArray.length) {
         const lastKeyword = keywordArray[keywordArray.length - 1];
