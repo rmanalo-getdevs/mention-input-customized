@@ -517,13 +517,10 @@ export class Editor extends React.Component {
     console.log({ evt });
     if (evt) {
       // const iosTextHeight = 20.5
-      const androidTextHeight = 20.5;
       // const textHeight = Platform.OS === 'ios' ? iosTextHeight : androidTextHeight
 
       const height =
-        Platform.OS === "ios"
-          ? evt.contentSize.height
-          : evt.contentSize.height - androidTextHeight;
+        Platform.OS === "ios" ? evt.contentSize.height : evt.contentSize.height;
       let editorHeight = 40;
       editorHeight = editorHeight + height;
       this.setState({
