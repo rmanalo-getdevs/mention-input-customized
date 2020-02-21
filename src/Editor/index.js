@@ -514,7 +514,7 @@ export class Editor extends React.Component {
      * the size of text in the input.
      */
 
-    console.log({ evt });
+    console.log({ evt, props });
     if (evt) {
       const androidTextHeight = 20.5;
 
@@ -599,11 +599,6 @@ export class Editor extends React.Component {
                 numberOfLines={100}
                 name={"message"}
                 value={state.inputText}
-                onBlur={() => {
-                  if (state.inputText === "") {
-                    this.setState({ selection: { start: 0, end: 0 } });
-                  }
-                }}
                 onChangeText={this.onChange}
                 selection={Platform.OS === "ios" ? this.state.selection : null}
                 selectionColor={"#000"}
