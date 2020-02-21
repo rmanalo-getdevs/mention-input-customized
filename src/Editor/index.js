@@ -561,15 +561,15 @@ export class Editor extends React.Component {
           />
         )}
         <View style={[styles.container, editorStyles.mainContainer]}>
-          <ScrollView
-            ref={scroll => {
-              this.scroll = scroll;
-            }}
-            onContentSizeChange={() => {
-              Platform.OS === "ios"
-                ? this.scroll.scrollToEnd({ animated: true })
-                : null;
-            }}
+          <View
+            // ref={scroll => {
+            //   this.scroll = scroll;
+            // }}
+            // onContentSizeChange={() => {
+            //   Platform.OS === "ios"
+            //     ? this.scroll.scrollToEnd({ animated: true })
+            //     : null;
+            // }}
             style={[styles.editorContainer, editorStyles.editorContainer]}
           >
             <View style={[{ height: this.state.editorHeight }]}>
@@ -620,7 +620,7 @@ export class Editor extends React.Component {
                 }}
               />
             </View>
-          </ScrollView>
+          </View>
         </View>
       </View>
     );
