@@ -595,6 +595,7 @@ export class Editor extends React.Component {
                 ref={input => props.onRef && props.onRef(input)}
                 style={[styles.input, editorStyles.input]}
                 multiline
+                autoFocus
                 numberOfLines={100}
                 name={"message"}
                 value={state.inputText}
