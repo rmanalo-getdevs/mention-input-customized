@@ -28,8 +28,7 @@ export class Editor extends React.Component {
     placeholder: PropTypes.string,
     renderMentionList: PropTypes.func,
     onFocussetText: PropTypes.func,
-    onFocusisFocus: PropTypes.func,
-    localRef: PropTypes.func
+    onFocusisFocus: PropTypes.func
   };
 
   constructor(props) {
@@ -597,7 +596,7 @@ export class Editor extends React.Component {
                 )}
               </View>
               <TextInput
-                ref={this.props.localRef}
+                ref={input => props.onRef && props.onRef(input)}
                 style={[styles.input, editorStyles.input]}
                 multiline
                 name={"message"}
@@ -614,7 +613,7 @@ export class Editor extends React.Component {
                 }
                 onFocus={() => {
                   this.props.onFocusisFocus(true);
-                  this.props.onFocussetText(" ");
+                  this.props.onFocussetText("");
                 }}
               />
             </View>
