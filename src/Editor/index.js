@@ -597,7 +597,7 @@ export class Editor extends React.Component {
                 )}
               </View>
               <TextInput
-                ref={this.props.localRef}
+                ref={input => props.onRef && props.onRef(input)}
                 style={[styles.input, editorStyles.input]}
                 multiline
                 autoFocus
