@@ -608,7 +608,9 @@ export class Editor extends React.Component {
                 selectionColor={"#000"}
                 onSelectionChange={this.handleSelectionChange}
                 placeholder={state.placeholder}
-                onContentSizeChange={this.onContentSizeChange}
+                onContentSizeChange={({ nativeEvent }) =>
+                  this.onContentSizeChange(nativeEvent)
+                }
                 scrollEnabled={false}
                 onFocus={() => {
                   this.props.onFocusisFocus(true);
