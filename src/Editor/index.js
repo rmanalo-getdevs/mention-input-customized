@@ -28,7 +28,8 @@ export class Editor extends React.Component {
     placeholder: PropTypes.string,
     renderMentionList: PropTypes.func,
     onFocussetText: PropTypes.func,
-    onFocusisFocus: PropTypes.func
+    onFocusisFocus: PropTypes.func,
+    localRef: PropTypes.func
   };
 
   constructor(props) {
@@ -596,7 +597,7 @@ export class Editor extends React.Component {
                 )}
               </View>
               <TextInput
-                ref={input => props.onRef && props.onRef(input)}
+                ref={this.props.localRef}
                 style={[styles.input, editorStyles.input]}
                 multiline
                 name={"message"}
@@ -604,7 +605,6 @@ export class Editor extends React.Component {
                 onChangeText={this.onChange}
                 selection={Platform.OS === "ios" ? this.state.selection : null}
                 selectionColor={"#000"}
-                onBlur={props.toggleEditor}
                 onSelectionChange={({ nativeEvent }) =>
                   this.handleSelectionChange(nativeEvent)
                 }
