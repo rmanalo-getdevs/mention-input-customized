@@ -600,7 +600,6 @@ export class Editor extends React.Component {
                 ref={this.props.localRef}
                 style={[styles.input, editorStyles.input]}
                 multiline
-                numberOfLines={100}
                 name={"message"}
                 value={state.inputText}
                 onChangeText={this.onChange}
