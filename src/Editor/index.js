@@ -513,6 +513,8 @@ export class Editor extends React.Component {
      * calculate editor height w.r.t
      * the size of text in the input.
      */
+
+    console.log({ evt });
     if (evt) {
       // const iosTextHeight = 20.5
       const androidTextHeight = 20.5;
@@ -521,7 +523,7 @@ export class Editor extends React.Component {
       const height =
         Platform.OS === "ios"
           ? evt.nativeEvent.contentSize.height
-          : evt.nativeEvent.contentSize.height;
+          : evt.nativeEvent.contentSize.height - androidTextHeight;
       let editorHeight = 40;
       editorHeight = editorHeight + height;
       this.setState({
@@ -563,7 +565,9 @@ export class Editor extends React.Component {
               this.scroll = scroll;
             }}
             onContentSizeChange={() => {
-              this.scroll.scrollToEnd({ animated: true });
+              Platform.OS === "ios"
+                ? this.scroll.scrollToEnd({ animated: true })
+                : null;
             }}
             style={[styles.editorContainer, editorStyles.editorContainer]}
           >
