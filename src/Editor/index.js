@@ -564,7 +564,9 @@ export class Editor extends React.Component {
               this.scroll = scroll;
             }}
             onContentSizeChange={() => {
-              this.scroll.scrollToEnd({ animated: true });
+              Platform.OS === "ios"
+                ? this.scroll.scrollToEnd({ animated: true })
+                : null;
             }}
             style={[styles.editorContainer, editorStyles.editorContainer]}
           >
@@ -611,7 +613,7 @@ export class Editor extends React.Component {
                 scrollEnabled={false}
                 onFocus={() => {
                   this.props.onFocusisFocus(true);
-                  this.props.onFocussetText("");
+                  this.props.onFocussetText(" ");
                 }}
               />
             </View>
