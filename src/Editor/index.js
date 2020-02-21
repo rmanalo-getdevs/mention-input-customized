@@ -599,6 +599,11 @@ export class Editor extends React.Component {
                 numberOfLines={100}
                 name={"message"}
                 value={state.inputText}
+                onBlur={() => {
+                  if (state.inputText === "") {
+                    this.setState({ selection: { start: 0, end: 0 } });
+                  }
+                }}
                 onChangeText={this.onChange}
                 selection={this.state.selection}
                 selectionColor={"#000"}
