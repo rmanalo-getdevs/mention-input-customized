@@ -516,11 +516,12 @@ export class Editor extends React.Component {
 
     console.log({ evt });
     if (evt) {
-      // const iosTextHeight = 20.5
-      // const textHeight = Platform.OS === 'ios' ? iosTextHeight : androidTextHeight
+      const androidTextHeight = 20.5;
 
       const height =
-        Platform.OS === "ios" ? evt.contentSize.height : evt.contentSize.height;
+        Platform.OS === "ios"
+          ? evt.contentSize.height
+          : evt.contentSize.height - androidTextHeight;
       let editorHeight = 40;
       editorHeight = editorHeight + height;
       this.setState({
@@ -562,7 +563,9 @@ export class Editor extends React.Component {
               this.scroll = scroll;
             }}
             onContentSizeChange={() => {
-              this.scroll.scrollToEnd({ animated: true });
+              Platform.OS === "ios"
+                ? this.scroll.scrollToEnd({ animated: true })
+                : null;
             }}
             style={[styles.editorContainer, editorStyles.editorContainer]}
           >
