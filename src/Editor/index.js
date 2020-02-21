@@ -562,11 +562,9 @@ export class Editor extends React.Component {
             ref={scroll => {
               this.scroll = scroll;
             }}
-            // onContentSizeChange={() => {
-            //   Platform.OS === "ios"
-            //     ? this.scroll.scrollToEnd({ animated: true })
-            //     : null;
-            // }}
+            onContentSizeChange={() => {
+              this.scroll.scrollToEnd({ animated: true });
+            }}
             style={[styles.editorContainer, editorStyles.editorContainer]}
           >
             <View style={[{ height: this.state.editorHeight }]}>
@@ -602,7 +600,7 @@ export class Editor extends React.Component {
                 value={state.inputText}
                 onBlur={props.toggleEditor}
                 onChangeText={this.onChange}
-                selection={Platform.OS === "ios" ? this.state.selection : null}
+                selection={this.state.selection}
                 selectionColor={"#000"}
                 onSelectionChange={this.handleSelectionChange}
                 placeholder={state.placeholder}
@@ -611,8 +609,8 @@ export class Editor extends React.Component {
                 }
                 scrollEnabled={false}
                 onFocus={() => {
-                  // this.props.onFocusisFocus(true);
-                  // this.props.onFocussetText("");
+                  this.props.onFocusisFocus(true);
+                  this.props.onFocussetText("");
                 }}
               />
             </View>
