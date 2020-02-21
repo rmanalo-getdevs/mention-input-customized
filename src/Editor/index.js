@@ -611,8 +611,8 @@ export class Editor extends React.Component {
                 }
                 scrollEnabled={false}
                 onFocus={() => {
-                  this.props.onFocusisFocus(true);
-                  this.props.onFocussetText("");
+                  // this.props.onFocusisFocus(true);
+                  // this.props.onFocussetText("");
                 }}
               />
             </View>
