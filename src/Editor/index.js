@@ -284,9 +284,11 @@ export class Editor extends React.Component {
     this.sendMessageToFooter(text);
   };
 
-  handleSelectionChange = ({ nativeEvent: { selection } }) => {
+  handleSelectionChange = nativeEvent => {
+    //  { nativeEvent: { selection } }
+    console.log({ nativeEvent });
     const prevSelc = this.state.selection;
-    let newSelc = { ...selection };
+    let newSelc = { ...nativeEvent.selection };
     if (newSelc.start !== newSelc.end) {
       /**
        * if user make or remove selection
@@ -598,14 +600,15 @@ export class Editor extends React.Component {
                 ref={this.props.localRef}
                 style={[styles.input, editorStyles.input]}
                 multiline
-                autoFocus
                 numberOfLines={100}
                 name={"message"}
                 value={state.inputText}
                 onChangeText={this.onChange}
                 selection={Platform.OS === "ios" ? this.state.selection : null}
                 selectionColor={"#000"}
-                onSelectionChange={this.handleSelectionChange}
+                onSelectionChange={({ nativeEvent }) =>
+                  this.handleSelectionChange(nativeEvent)
+                }
                 placeholder={state.placeholder}
                 onContentSizeChange={({ nativeEvent }) =>
                   this.onContentSizeChange(nativeEvent)
