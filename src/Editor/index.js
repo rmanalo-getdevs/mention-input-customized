@@ -599,7 +599,8 @@ export class Editor extends React.Component {
                 numberOfLines={100}
                 name={"message"}
                 value={state.inputText}
-                onBlur={() => {
+                onBlur={props.toggleEditor}
+                onSubmitEditing={() => {
                   if (state.inputText === "") {
                     this.setState({ selection: { start: 0, end: 0 } });
                   }
