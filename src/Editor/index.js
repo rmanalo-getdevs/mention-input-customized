@@ -28,7 +28,8 @@ export class Editor extends React.Component {
     placeholder: PropTypes.string,
     renderMentionList: PropTypes.func,
     onFocussetText: PropTypes.func,
-    onFocusisFocus: PropTypes.func
+    onFocusisFocus: PropTypes.func,
+    localRef: PropTypes.func
   };
 
   constructor(props) {
@@ -592,7 +593,7 @@ export class Editor extends React.Component {
                 )}
               </View>
               <TextInput
-                ref={input => this.props.onRef && this.props.onRef(input)}
+                ref={this.props.localRef}
                 style={[styles.input, editorStyles.input]}
                 multiline
                 autoFocus
