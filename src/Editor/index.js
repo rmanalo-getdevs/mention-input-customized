@@ -561,7 +561,7 @@ export class Editor extends React.Component {
           />
         )}
         <View style={[styles.container, editorStyles.mainContainer]}>
-          <ScrollView
+          <View
             ref={scroll => {
               this.scroll = scroll;
             }}
@@ -618,7 +618,7 @@ export class Editor extends React.Component {
                 }}
               />
             </View>
-          </ScrollView>
+          </View>
         </View>
       </View>
     );
