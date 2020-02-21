@@ -514,7 +514,7 @@ export class Editor extends React.Component {
      * the size of text in the input.
      */
 
-    console.log({ evt, props });
+    console.log(this.props);
     if (evt) {
       const androidTextHeight = 20.5;
 
@@ -592,7 +592,7 @@ export class Editor extends React.Component {
                 )}
               </View>
               <TextInput
-                ref={input => props.onRef && props.onRef(input)}
+                ref={input => this.props.onRef && this.props.onRef(input)}
                 style={[styles.input, editorStyles.input]}
                 multiline
                 autoFocus
