@@ -153,23 +153,17 @@ export class Editor extends React.Component {
      * @ char e.g. @billroy
      */
 
-    const textInput = inputText.toUpperCase();
     if (this.isTrackingStarted) {
       let pattern = null;
-      let patternOther = null;
       if (this.state.triggerLocation === "new-word-only") {
         pattern = new RegExp(
-          `\\B${this.state.trigger}[a-z0-9_-]+|\\B${this.state.trigger}`,
+          `\\B${this.state.trigger}[A-Za-z0-9_-]+|\\B${this.state.trigger}`,
           `gi`
         );
       } else {
         //anywhere
         pattern = new RegExp(
-          `\\${this.state.trigger}[a-z0-9_-]+|\\${this.state.trigger}`,
-          `i`
-        );
-        patternOther = new RegExp(
-          `\\${this.state.trigger}[a-z0-9_-]+|\\${this.state.trigger}`,
+          `\\${this.state.trigger}[A-Za-z0-9_-]+|\\${this.state.trigger}`,
           `i`
         );
       }
@@ -511,7 +505,7 @@ export class Editor extends React.Component {
       formattedText: this.formatText(text)
       // selection,
     });
-    this.checkForMention(text.toUpperCase(), selection);
+    this.checkForMention(text, selection);
     // const text = `${initialStr} @[${user.username}](id:${user.id}) ${remStr}`; //'@[__display__](__id__)' ///find this trigger parsing from react-mentions
 
     this.sendMessageToFooter(text);
