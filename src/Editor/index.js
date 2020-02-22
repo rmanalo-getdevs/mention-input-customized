@@ -410,7 +410,7 @@ export class Editor extends React.Component {
   }
 
   onChange = (inputText, fromAtBtn) => {
-    let text = inputText.toUpperCase();
+    let text = inputText;
     const prevText = this.state.inputText;
     let selection = { ...this.state.selection };
     if (fromAtBtn) {
@@ -511,7 +511,7 @@ export class Editor extends React.Component {
       formattedText: this.formatText(text)
       // selection,
     });
-    this.checkForMention(text, selection);
+    this.checkForMention(text.toUpperCase(), selection);
     // const text = `${initialStr} @[${user.username}](id:${user.id}) ${remStr}`; //'@[__display__](__id__)' ///find this trigger parsing from react-mentions
 
     this.sendMessageToFooter(text);
