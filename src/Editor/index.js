@@ -154,6 +154,7 @@ export class Editor extends React.Component {
      */
     if (this.isTrackingStarted) {
       let pattern = null;
+      let patternOther = null;
       if (this.state.triggerLocation === "new-word-only") {
         pattern = new RegExp(
           `\\B${this.state.trigger}[a-z0-9_-]+|\\B${this.state.trigger}`,
@@ -165,8 +166,12 @@ export class Editor extends React.Component {
           `\\${this.state.trigger}[a-z0-9_-]+|\\${this.state.trigger}`,
           `i`
         );
+        patternOther = new RegExp(
+          `\\${this.state.trigger}[a-z0-9_-]+|\\${this.state.trigger}`,
+          `i`
+        );
       }
-      const str = inputText.toLowerCase().substr(this.menIndex);
+      const str = inputText.substr(this.menIndex);
       const keywordArray = str.match(pattern);
       if (keywordArray && !!keywordArray.length) {
         const lastKeyword = keywordArray[keywordArray.length - 1];
@@ -286,7 +291,7 @@ export class Editor extends React.Component {
 
   handleSelectionChange = nativeEvent => {
     //  { nativeEvent: { selection } }
-    console.log({ nativeEvent });
+
     const prevSelc = this.state.selection;
     let newSelc = { ...nativeEvent.selection };
     if (newSelc.start !== newSelc.end) {
@@ -517,7 +522,6 @@ export class Editor extends React.Component {
      * the size of text in the input.
      */
 
-    console.log(this.props);
     if (evt) {
       const androidTextHeight = 20.5;
 
