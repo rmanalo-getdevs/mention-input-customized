@@ -172,7 +172,7 @@ export class Editor extends React.Component {
         );
       }
       const str = inputText.substr(this.menIndex);
-      const keywordArray = str.match(pattern);
+      const keywordArray = str.match(patternOther);
       if (keywordArray && !!keywordArray.length) {
         const lastKeyword = keywordArray[keywordArray.length - 1];
         this.updateSuggestions(lastKeyword);
