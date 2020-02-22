@@ -152,7 +152,7 @@ export class Editor extends React.Component {
      * according to what user type with
      * @ char e.g. @billroy
      */
-    console.log({ inputText });
+
     const textInput = inputText.toUpperCase();
     if (this.isTrackingStarted) {
       let pattern = null;
