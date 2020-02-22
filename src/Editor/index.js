@@ -173,7 +173,7 @@ export class Editor extends React.Component {
           `i`
         );
       }
-      const str = textInput.substr(this.menIndex);
+      const str = inputText.substr(this.menIndex);
       const keywordArray = str.match(pattern);
       if (keywordArray && !!keywordArray.length) {
         const lastKeyword = keywordArray[keywordArray.length - 1];
@@ -410,7 +410,7 @@ export class Editor extends React.Component {
   }
 
   onChange = (inputText, fromAtBtn) => {
-    let text = inputText;
+    let text = inputText.toUpperCase();
     const prevText = this.state.inputText;
     let selection = { ...this.state.selection };
     if (fromAtBtn) {
