@@ -152,6 +152,8 @@ export class Editor extends React.Component {
      * according to what user type with
      * @ char e.g. @billroy
      */
+    console.log({ inputText });
+    const textInput = inputText.toUpperCase();
     if (this.isTrackingStarted) {
       let pattern = null;
       let patternOther = null;
@@ -171,7 +173,7 @@ export class Editor extends React.Component {
           `i`
         );
       }
-      const str = inputText.substr(this.menIndex);
+      const str = textInput.substr(this.menIndex);
       const keywordArray = str.match(patternOther);
       if (keywordArray && !!keywordArray.length) {
         const lastKeyword = keywordArray[keywordArray.length - 1];
