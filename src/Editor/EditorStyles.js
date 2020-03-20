@@ -14,17 +14,16 @@ export default StyleSheet.create({
     height: "100%"
   },
   input: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#000",
     fontWeight: "400",
     paddingHorizontal: 20,
-
+    minHeight: 40,
     position: "absolute",
     top: 0,
     color: "transparent",
     alignSelf: "stretch",
-    width: "100%",
-    height: "100%"
+    width: "100%"
   },
   formmatedTextWrapper: {
     position: "absolute",
@@ -41,8 +40,8 @@ export default StyleSheet.create({
   mention: {
     fontSize: 16,
     fontWeight: "400",
-    backgroundColor: "transparent",
-    color: "#0000FF"
+    backgroundColor: "rgba(36, 77, 201, 0.05)",
+    color: "#244dc9"
   },
   placeholderText: {
     color: "rgba(0, 0, 0, 0.1)",
