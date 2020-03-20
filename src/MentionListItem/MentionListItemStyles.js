@@ -9,17 +9,19 @@ export default StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     color: "rgba(0, 0, 0, 0.1)",
-    height: 30,
+    height: 50,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderColor: "#E7EAEA"
+    borderColor: "#E7EAEA",
+    padding: 5
   },
   text: {
     alignSelf: "center"
   },
   title: {
     fontSize: 13,
-    color: "rgba(0, 0, 0, 0.8)"
+    color: "rgba(0, 0, 0, 0.8)",
+    flexDirection: "column"
   },
   thumbnailWrapper: {
     width: 35,

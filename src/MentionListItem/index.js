@@ -36,10 +36,9 @@ export class MentionListItem extends React.PureComponent {
           /> */}
 
           <View style={[styles.text, editorStyles.mentionListItemTextWrapper]}>
+            <Text>{user.realName}</Text>
             <Text style={[styles.title, editorStyles.mentionListItemTitle]}>
-              {/* {user.name} */}
-
-              {reactStringReplace(user.name, keyword.substr(1), (match, i) => (
+              {reactStringReplace(`@${user.name}`, keyword, (match, i) => (
                 <Text style={{ color: "#c6d32e" }} key={i}>
                   {match}
                 </Text>
