@@ -42,7 +42,7 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: "400",
     backgroundColor: "transparent",
-    color: "#000"
+    color: "#0000FF"
   },
   placeholderText: {
     color: "rgba(0, 0, 0, 0.1)",
