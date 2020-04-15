@@ -14,6 +14,7 @@ export default StyleSheet.create({
     height: "100%"
   },
   input: {
+    height: 100,
     fontSize: 16,
     color: "#000",
     fontWeight: "400",
