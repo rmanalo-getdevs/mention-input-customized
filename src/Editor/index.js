@@ -536,7 +536,7 @@ export class Editor extends React.Component {
 
   setTempEditorHeight = () => {
     // temporarily set height to 100% so whole textarea is touchable
-    let { mainContainerHeight } = this.state;
+    let { mainContainerHeight, editorHeight } = this.state;
     this.setState({ editorHeight: mainContainerHeight ? mainContainerHeight : editorHeight });
   }
 
