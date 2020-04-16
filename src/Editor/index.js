@@ -29,8 +29,13 @@ export class Editor extends React.Component {
     renderMentionList: PropTypes.func,
     onFocussetText: PropTypes.func,
     onFocusisFocus: PropTypes.func,
-    localRef: PropTypes.func
+    localRef: PropTypes.func,
+    autoFocus: PropTypes.bool
   };
+
+  static defaultProps = {
+    autoFocus: false
+  }
 
   constructor(props) {
     super(props);
@@ -613,7 +618,7 @@ export class Editor extends React.Component {
                 style={[styles.input, editorStyles.input, { height: '100%' }]}
                 multiline
                 numberOfLines={100}
-                autoFocus
+                autoFocus={props.autoFocus}
                 name={"message"}
                 value={state.inputText}
                 onChangeText={this.onChange}
