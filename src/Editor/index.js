@@ -29,8 +29,13 @@ export class Editor extends React.Component {
     renderMentionList: PropTypes.func,
     onFocussetText: PropTypes.func,
     onFocusisFocus: PropTypes.func,
-    localRef: PropTypes.func
+    localRef: PropTypes.func,
+    autoFocus: PropTypes.bool
   };
+
+  static defaultProps = {
+    autoFocus: false
+  }
 
   constructor(props) {
     super(props);
@@ -64,7 +69,8 @@ export class Editor extends React.Component {
       showMentions: false,
       editorHeight: 72,
       scrollContentInset: { top: 0, bottom: 0, left: 0, right: 0 },
-      placeholder: props.placeholder || ""
+      placeholder: props.placeholder || "",
+      mainContainerHeight: 0
     };
     this.isTrackingStarted = false;
     this.previousChar = " ";
@@ -533,6 +539,17 @@ export class Editor extends React.Component {
     }
   };
 
+  setTempEditorHeight = () => {
+    // temporarily set height to 100% so whole textarea is touchable
+    let { mainContainerHeight, editorHeight } = this.state;
+    this.setState({ editorHeight: mainContainerHeight ? mainContainerHeight : editorHeight });
+  }
+
+  onMainContainerLayout = event => {
+    let { height } = event.nativeEvent.layout;
+    this.setState({ mainContainerHeight: height });
+  }
+
   render() {
     const { props, state } = this;
     const { editorStyles = {} } = props;
@@ -560,7 +577,7 @@ export class Editor extends React.Component {
             editorStyles={editorStyles}
           />
         )}
-        <View style={[styles.container, editorStyles.mainContainer]}>
+        <View style={[styles.container, editorStyles.mainContainer]} onLayout={event => this.onMainContainerLayout(event)}>
           <ScrollView
             ref={scroll => {
               this.scroll = scroll;
@@ -598,10 +615,10 @@ export class Editor extends React.Component {
               </View>
               <TextInput
                 ref={input => props.onRef && props.onRef(input)}
-                style={[styles.input, editorStyles.input]}
+                style={[styles.input, editorStyles.input, { height: '100%' }]}
                 multiline
                 numberOfLines={100}
-                autoFocus
+                autoFocus={props.autoFocus}
                 name={"message"}
                 value={state.inputText}
                 onChangeText={this.onChange}
@@ -614,9 +631,14 @@ export class Editor extends React.Component {
                 onContentSizeChange={({ nativeEvent }) =>
                   this.onContentSizeChange(nativeEvent)
                 }
-                onFocus={() => {
+                onFocus={({ nativeEvent }) => {
+                  nativeEvent.contentSize = { height: 0 };
+                  this.onContentSizeChange(nativeEvent);
                   this.props.onFocusisFocus(true);
                   this.props.onFocussetText("");
+                }}
+                onBlur={() => {
+                  this.setTempEditorHeight()
                 }}
               />
             </View>
