@@ -382,7 +382,7 @@ export class Editor extends React.Component {
 
       extractHtmlText = extractHtmlText.concat(initialStr);
       extractHtmlText = extractHtmlText.concat(
-        `<strong data-mention=\\“${men.id}\\“><font color='#1C89FE'><span style='color:#1c89fe'><a style='color:#1c89fe' href='/connect/roster/${men.id}'>${men.toSave}</a></span></font></strong>`
+        `<strong><font color='#1c89fe'><span><a href='/connect/roster/${men.id}'>${men.toSave}</a></span></font></strong>`
       );
       if (
         EU.isKeysAreSame(EU.getLastKeyInMap(this.mentionsMap), [start, end])
