@@ -32,7 +32,12 @@ export class Editor extends React.Component {
     localRef: PropTypes.func,
     autoFocus: PropTypes.bool,
     mentionComponentList: PropTypes.func,
-    useThisFor: PropTypes.string
+    useThisFor: PropTypes.string,
+    setEditorState_isTrackingStarted: PropTypes.func,
+    setEditorState_onSuggestionTap: PropTypes.func,
+    setEditorState_renderMentionList: PropTypes.func,
+    setEditorState_keyword: PropTypes.func,
+    setEditorState_list: PropTypes.func
   };
 
   static defaultProps = {
@@ -556,23 +561,12 @@ export class Editor extends React.Component {
 
   changesHandler = txt => {
     const { props, state } = this;
-    const mentionListProps = {
-      list: props.list,
-      keyword: state.keyword,
-      isTrackingStarted: state.isTrackingStarted,
-      onSuggestionTap: this.onSuggestionTap.bind(this),
-      editorStyles: props.editorStyles
-    };
+    props.setEditorState_list(props.list);
+    props.setEditorState_keyword(state.keyword);
+    props.setEditorState_isTrackingStarted(state.isTrackingStarted);
+    props.setEditorState_onSuggestionTap(this.onSuggestionTap.bind(this));
+    props.setEditorState_renderMentionList(props.renderMentionList);
 
-    props.mentionComponentList({
-      mentionListProps,
-      renderMentionList: props.renderMentionList,
-      list: props.list,
-      keyword: state.keyword,
-      isTrackingStarted: state.isTrackingStarted,
-      onSuggestionTap: this.onSuggestionTap,
-      editorStyles: props.editorStyles
-    });
     this.onChange(txt);
   };
 
