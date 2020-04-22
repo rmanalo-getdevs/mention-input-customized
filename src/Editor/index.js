@@ -30,12 +30,14 @@ export class Editor extends React.Component {
     onFocussetText: PropTypes.func,
     onFocusisFocus: PropTypes.func,
     localRef: PropTypes.func,
-    autoFocus: PropTypes.bool
+    autoFocus: PropTypes.bool,
+    mentionComponentList: PropTypes.func,
+    useThisFor: PropTypes.string
   };
 
   static defaultProps = {
     autoFocus: false
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -69,7 +71,8 @@ export class Editor extends React.Component {
       showMentions: false,
       editorHeight: 72,
       scrollContentInset: { top: 0, bottom: 0, left: 0, right: 0 },
-      placeholder: props.placeholder || ""
+      placeholder: props.placeholder || "",
+      mainContainerHeight: 0
     };
     this.isTrackingStarted = false;
     this.previousChar = " ";
@@ -538,6 +541,41 @@ export class Editor extends React.Component {
     }
   };
 
+  setTempEditorHeight = () => {
+    // temporarily set height to 100% so whole textarea is touchable
+    let { mainContainerHeight, editorHeight } = this.state;
+    this.setState({
+      editorHeight: mainContainerHeight ? mainContainerHeight : editorHeight
+    });
+  };
+
+  onMainContainerLayout = event => {
+    let { height } = event.nativeEvent.layout;
+    this.setState({ mainContainerHeight: height });
+  };
+
+  changesHandler = txt => {
+    const { props, state } = this;
+    const mentionListProps = {
+      list: props.list,
+      keyword: state.keyword,
+      isTrackingStarted: state.isTrackingStarted,
+      onSuggestionTap: this.onSuggestionTap.bind(this),
+      editorStyles: props.editorStyles
+    };
+
+    props.mentionComponentList({
+      mentionListProps,
+      renderMentionList: props.renderMentionList,
+      list: props.list,
+      keyword: state.keyword,
+      isTrackingStarted: state.isTrackingStarted,
+      onSuggestionTap: this.onSuggestionTap,
+      editorStyles: props.editorStyles
+    });
+    this.onChange(txt);
+  };
+
   render() {
     const { props, state } = this;
     const { editorStyles = {} } = props;
@@ -554,18 +592,23 @@ export class Editor extends React.Component {
 
     return (
       <View styles={editorStyles.mainContainer}>
-        {props.renderMentionList ? (
-          props.renderMentionList(mentionListProps)
-        ) : (
-          <MentionList
-            list={props.list}
-            keyword={state.keyword}
-            isTrackingStarted={state.isTrackingStarted}
-            onSuggestionTap={this.onSuggestionTap}
-            editorStyles={editorStyles}
-          />
-        )}
-        <View style={[styles.container, editorStyles.mainContainer]}>
+        {props.useThisFor !== "comment" ? (
+          props.renderMentionList ? (
+            props.renderMentionList(mentionListProps)
+          ) : (
+            <MentionList
+              list={props.list}
+              keyword={state.keyword}
+              isTrackingStarted={state.isTrackingStarted}
+              onSuggestionTap={this.onSuggestionTap}
+              editorStyles={editorStyles}
+            />
+          )
+        ) : null}
+        <View
+          style={[styles.container, editorStyles.mainContainer]}
+          onLayout={event => this.onMainContainerLayout(event)}
+        >
           <ScrollView
             ref={scroll => {
               this.scroll = scroll;
@@ -603,13 +646,17 @@ export class Editor extends React.Component {
               </View>
               <TextInput
                 ref={input => props.onRef && props.onRef(input)}
-                style={[styles.input, editorStyles.input]}
+                style={[styles.input, editorStyles.input, { height: "100%" }]}
                 multiline
                 numberOfLines={100}
                 autoFocus={props.autoFocus}
                 name={"message"}
                 value={state.inputText}
-                onChangeText={this.onChange}
+                onChangeText={
+                  props.useThisFor == "comment"
+                    ? this.changesHandler
+                    : this.onChange
+                }
                 selection={Platform.OS === "ios" ? this.state.selection : null}
                 selectionColor={"#000"}
                 onSelectionChange={({ nativeEvent }) =>
@@ -619,9 +666,14 @@ export class Editor extends React.Component {
                 onContentSizeChange={({ nativeEvent }) =>
                   this.onContentSizeChange(nativeEvent)
                 }
-                onFocus={() => {
+                onFocus={({ nativeEvent }) => {
+                  nativeEvent.contentSize = { height: 0 };
+                  this.onContentSizeChange(nativeEvent);
                   this.props.onFocusisFocus(true);
                   this.props.onFocussetText("");
+                }}
+                onBlur={() => {
+                  this.setTempEditorHeight();
                 }}
               />
             </View>

@@ -5,7 +5,6 @@ import { Text, View, TouchableOpacity } from "react-native";
 // Styles
 import styles from "./MentionListItemStyles";
 
-import Avatar from "../Avatar";
 const reactStringReplace = require("react-string-replace");
 
 export class MentionListItem extends React.PureComponent {
