@@ -131,6 +131,8 @@ export class Editor extends React.Component {
   startTracking(menIndex) {
     this.isTrackingStarted = true;
     this.menIndex = menIndex;
+    this.props.setEditorState_isTrackingStarted(true);
+    this.props.setEditorState_keyword("");
     this.setState({
       keyword: "",
       menIndex,
@@ -141,6 +143,7 @@ export class Editor extends React.Component {
   stopTracking() {
     this.isTrackingStarted = false;
     // this.closeSuggestionsPanel();
+    this.props.setEditorState_isTrackingStarted(false);
     this.setState({
       isTrackingStarted: false
     });
@@ -148,6 +151,7 @@ export class Editor extends React.Component {
   }
 
   updateSuggestions(lastKeyword) {
+    this.props.setEditorState_keyword(lastKeyword);
     this.setState({
       keyword: lastKeyword
     });
@@ -268,6 +272,8 @@ export class Editor extends React.Component {
       inputText,
       menIndex
     );
+
+    console.log({ user });
 
     const username = `@${user.username}`;
     const text = `${initialStr}${username} ${remStr}`;
@@ -561,13 +567,13 @@ export class Editor extends React.Component {
 
   changesHandler = txt => {
     const { props, state } = this;
-    props.setEditorState_list(props.list);
-    props.setEditorState_keyword(state.keyword);
-    props.setEditorState_isTrackingStarted(state.isTrackingStarted);
-    props.setEditorState_onSuggestionTap(this.onSuggestionTap.bind(this));
-    props.setEditorState_renderMentionList(props.renderMentionList);
-
     this.onChange(txt);
+
+    props.setEditorState_list(props.list);
+    props.setEditorState_onSuggestionTap({
+      suggestionTap: this.onSuggestionTap
+    });
+    props.setEditorState_renderMentionList(props.renderMentionList);
   };
 
   render() {
@@ -586,19 +592,17 @@ export class Editor extends React.Component {
 
     return (
       <View styles={editorStyles.mainContainer}>
-        {props.useThisFor !== "comment" ? (
-          props.renderMentionList ? (
-            props.renderMentionList(mentionListProps)
-          ) : (
-            <MentionList
-              list={props.list}
-              keyword={state.keyword}
-              isTrackingStarted={state.isTrackingStarted}
-              onSuggestionTap={this.onSuggestionTap}
-              editorStyles={editorStyles}
-            />
-          )
-        ) : null}
+        {props.useThisFor === "comment" ? null : props.renderMentionList ? (
+          props.renderMentionList(mentionListProps)
+        ) : (
+          <MentionList
+            list={props.list}
+            keyword={state.keyword}
+            isTrackingStarted={state.isTrackingStarted}
+            onSuggestionTap={this.onSuggestionTap}
+            editorStyles={editorStyles}
+          />
+        )}
         <View
           style={[styles.container, editorStyles.mainContainer]}
           onLayout={event => this.onMainContainerLayout(event)}
@@ -647,7 +651,7 @@ export class Editor extends React.Component {
                 name={"message"}
                 value={state.inputText}
                 onChangeText={
-                  props.useThisFor == "comment"
+                  props.useThisFor === "comment"
                     ? this.changesHandler
                     : this.onChange
                 }
