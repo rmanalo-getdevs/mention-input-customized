@@ -69,8 +69,7 @@ export class Editor extends React.Component {
       showMentions: false,
       editorHeight: 72,
       scrollContentInset: { top: 0, bottom: 0, left: 0, right: 0 },
-      placeholder: props.placeholder || "",
-      mainContainerHeight: 0
+      placeholder: props.placeholder || ""
     };
     this.isTrackingStarted = false;
     this.previousChar = " ";
@@ -539,17 +538,6 @@ export class Editor extends React.Component {
     }
   };
 
-  setTempEditorHeight = () => {
-    // temporarily set height to 100% so whole textarea is touchable
-    let { mainContainerHeight, editorHeight } = this.state;
-    this.setState({ editorHeight: mainContainerHeight ? mainContainerHeight : editorHeight });
-  }
-
-  onMainContainerLayout = event => {
-    let { height } = event.nativeEvent.layout;
-    this.setState({ mainContainerHeight: height });
-  }
-
   render() {
     const { props, state } = this;
     const { editorStyles = {} } = props;
@@ -577,7 +565,7 @@ export class Editor extends React.Component {
             editorStyles={editorStyles}
           />
         )}
-        <View style={[styles.container, editorStyles.mainContainer]} onLayout={event => this.onMainContainerLayout(event)}>
+        <View style={[styles.container, editorStyles.mainContainer]}>
           <ScrollView
             ref={scroll => {
               this.scroll = scroll;
@@ -615,7 +603,7 @@ export class Editor extends React.Component {
               </View>
               <TextInput
                 ref={input => props.onRef && props.onRef(input)}
-                style={[styles.input, editorStyles.input, { height: '100%' }]}
+                style={[styles.input, editorStyles.input]}
                 multiline
                 numberOfLines={100}
                 autoFocus={props.autoFocus}
@@ -631,14 +619,9 @@ export class Editor extends React.Component {
                 onContentSizeChange={({ nativeEvent }) =>
                   this.onContentSizeChange(nativeEvent)
                 }
-                onFocus={({ nativeEvent }) => {
-                  nativeEvent.contentSize = { height: 0 };
-                  this.onContentSizeChange(nativeEvent);
+                onFocus={() => {
                   this.props.onFocusisFocus(true);
                   this.props.onFocussetText("");
-                }}
-                onBlur={() => {
-                  this.setTempEditorHeight()
                 }}
               />
             </View>
