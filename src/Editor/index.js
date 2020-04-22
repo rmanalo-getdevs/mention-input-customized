@@ -131,8 +131,12 @@ export class Editor extends React.Component {
   startTracking(menIndex) {
     this.isTrackingStarted = true;
     this.menIndex = menIndex;
-    this.props.setEditorState_isTrackingStarted(true);
-    this.props.setEditorState_keyword("");
+
+    if (this.props.useThisFor === "comment") {
+      this.props.setEditorState_isTrackingStarted(true);
+      this.props.setEditorState_keyword("");
+    }
+
     this.setState({
       keyword: "",
       menIndex,
@@ -143,7 +147,10 @@ export class Editor extends React.Component {
   stopTracking() {
     this.isTrackingStarted = false;
     // this.closeSuggestionsPanel();
-    this.props.setEditorState_isTrackingStarted(false);
+    if (this.props.useThisFor === "comment") {
+      this.props.setEditorState_isTrackingStarted(false);
+    }
+
     this.setState({
       isTrackingStarted: false
     });
@@ -151,7 +158,10 @@ export class Editor extends React.Component {
   }
 
   updateSuggestions(lastKeyword) {
-    this.props.setEditorState_keyword(lastKeyword);
+    if (this.props.useThisFor === "comment") {
+      this.props.setEditorState_keyword(lastKeyword);
+    }
+
     this.setState({
       keyword: lastKeyword
     });
