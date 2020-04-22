@@ -581,7 +581,7 @@ export class Editor extends React.Component {
 
     props.setEditorState_list(props.list);
     props.setEditorState_onSuggestionTap({
-      suggestionTap: this.onSuggestionTap
+      suggestionTap: this.onSuggestionTap.bind(this)
     });
     props.setEditorState_renderMentionList(props.renderMentionList);
   };
