@@ -17,7 +17,7 @@ export default StyleSheet.create({
     fontSize: 16,
     color: "#000",
     fontWeight: "400",
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     minHeight: 40,
     position: "absolute",
     top: 0,
@@ -28,10 +28,31 @@ export default StyleSheet.create({
   formmatedTextWrapper: {
     position: "absolute",
     top: 0,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingVertical: 5,
     width: "100%",
     height: "100%"
+  },
+  androidInput: {
+    fontSize: 16,
+    color: "#000",
+    fontWeight: "400",
+    paddingHorizontal: 10,
+    minHeight: 40,
+    position: "absolute",
+    top: 0,
+    color: "transparent",
+    alignSelf: "stretch",
+    width: "100%"
+  },
+  androidFormmatedTextWrapper: {
+    position: "absolute",
+    top: 0,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    width: "100%",
+    height: "100%"
+    // marginTop:-15
   },
   formmatedText: {
     fontSize: 16,
