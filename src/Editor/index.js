@@ -38,7 +38,7 @@ export class Editor extends React.Component {
     setEditorState_renderMentionList: PropTypes.func,
     setEditorState_keyword: PropTypes.func,
     setEditorState_list: PropTypes.func,
-    onRef: PropTypes.func
+    onRef:PropTypes.func
   };
 
   static defaultProps = {
@@ -283,6 +283,8 @@ export class Editor extends React.Component {
       inputText,
       menIndex
     );
+
+   
 
     const username = `@${user.username}`;
     const text = `${initialStr}${username} ${remStr}`;
@@ -546,7 +548,7 @@ export class Editor extends React.Component {
      * the size of text in the input.
      */
 
-    console.log({ evt });
+    
 
     if (evt) {
       const androidTextHeight = 20;
@@ -554,7 +556,7 @@ export class Editor extends React.Component {
       const height =
         Platform.OS === "ios"
           ? evt.contentSize.height
-          : evt.contentSize.height - 10;
+          : evt.contentSize.height-10;
       let editorHeight = 40;
       editorHeight = editorHeight + height;
       this.setState({
@@ -567,6 +569,7 @@ export class Editor extends React.Component {
     // temporarily set height to 100% so whole textarea is touchable
     let { mainContainerHeight, editorHeight } = this.state;
 
+   
     this.setState({
       editorHeight: mainContainerHeight ? mainContainerHeight : editorHeight
     });
@@ -602,6 +605,8 @@ export class Editor extends React.Component {
       editorStyles
     };
 
+   
+
     return (
       <View styles={editorStyles.mainContainer}>
         {props.useThisFor === "comment" ? null : props.renderMentionList ? (
@@ -632,17 +637,13 @@ export class Editor extends React.Component {
           >
             <View style={[{ height: this.state.editorHeight }]}>
               <View
-                style={
-                  Platform.OS === "ios"
-                    ? [
-                        styles.formmatedTextWrapper,
-                        editorStyles.inputMaskTextWrapper
-                      ]
-                    : [
-                        styles.formmatedTextWrapper,
-                        editorStyles.inputMaskTextWrapper
-                      ]
-                }
+                style={Platform.OS === "ios" ? [
+                  styles.formmatedTextWrapper,
+                  editorStyles.inputMaskTextWrapper
+                ]:[
+                  styles.formmatedTextWrapper,
+                  editorStyles.inputMaskTextWrapper
+                ] }
               >
                 {state.formattedText !== "" ? (
                   <Text
@@ -663,15 +664,11 @@ export class Editor extends React.Component {
               </View>
               <TextInput
                 ref={input => props.onRef && props.onRef(input)}
-                style={
-                  Platform.OS === "ios"
-                    ? [styles.input, editorStyles.input, { height: "100%" }]
-                    : [styles.input, editorStyles.input, { height: "100%" }]
-                }
+                style={Platform.OS === "ios" ? [styles.input, editorStyles.input, { height: "100%" }] :[styles.input, editorStyles.input, { height: "100%" }] }
                 multiline
-                textAlignVertical="top"
+                textAlignVertical='top'
                 numberOfLines={100}
-                autoFocus={props.autoFocus}
+                 autoFocus={props.autoFocus}
                 name={"message"}
                 value={state.inputText}
                 onChangeText={
@@ -679,30 +676,51 @@ export class Editor extends React.Component {
                     ? this.changesHandler
                     : this.onChange
                 }
-                onChange={({ nativeEvent }) => console.log({ nativeEvent })}
+                onChange={({ nativeEvent }) => console.log({nativeEvent})}
                 selection={Platform.OS === "ios" ? this.state.selection : null}
                 selectionColor={"#000"}
-                onSelectionChange={({ nativeEvent }) => {
-                  this.handleSelectionChange(nativeEvent);
-                }}
+                onSelectionChange={({ nativeEvent }) =>
+                 { 
+
+                 
+                    this.handleSelectionChange(nativeEvent)
+                  
+                
+                  }
+                }
                 placeholder={state.placeholder}
-                onContentSizeChange={({ nativeEvent }) => {
-                  //  if(Platform.OS === "ios"){
-                  this.onContentSizeChange(nativeEvent);
-                  //  }
-                }}
+                onContentSizeChange={({ nativeEvent }) =>
+               {   
+              //  if(Platform.OS === "ios"){
+                  this.onContentSizeChange(nativeEvent)
+              //  }
+               
+                }
+                }
                 onFocus={({ nativeEvent }) => {
-                  //   if(Platform.OS === "ios"){
-                  nativeEvent.contentSize = { height: 0 };
-                  this.onContentSizeChange(nativeEvent);
-                  this.props.onFocusisFocus(true);
-                  this.props.onFocussetText("");
-                  //   }
+
+               //   if(Platform.OS === "ios"){
+
+               
+
+               if(state.inputText === ''){
+                nativeEvent.contentSize = { height: 0 };
+                this.onContentSizeChange(nativeEvent);
+               }else{
+                // nativeEvent.contentSize = { height: state.editorHeight };
+               }
+                   
+                
+                   this.props.onFocusisFocus(true);
+                   this.props.onFocussetText("");
+               //   }
+                 
                 }}
                 onBlur={() => {
-                  //    if(Platform.OS === "ios"){
-                  this.setTempEditorHeight();
-                  //     }
+              //    if(Platform.OS === "ios"){
+                    this.setTempEditorHeight();
+             //     }
+               
                 }}
               />
             </View>
