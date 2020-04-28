@@ -409,21 +409,35 @@ export class Editor extends React.Component {
       formattedText = formattedText.concat(`@[${men.username}](id:${men.id})`);
 
       extractHtmlText = extractHtmlText.concat(initialStr);
+     
       extractHtmlText = extractHtmlText.concat(
-        `<strong><font color='#1c89fe'><span><a href='/connect/roster/${men.id}'>${men.toSave}</a></span></font></strong>`
+        `<strong><font color='#1c89fe'><span><a href='/connect/roster/${men.id}'>${men.toSave}</a></span></font></strong>,`
       );
       if (
         EU.isKeysAreSame(EU.getLastKeyInMap(this.mentionsMap), [start, end])
       ) {
         const lastStr = inputText.substr(lastIndex); //remaining string
         formattedText = formattedText.concat(lastStr);
-        extractHtmlText = extractHtmlText.concat(lastStr);
+      
+       
+        extractHtmlText = extractHtmlText.concat(` ${lastStr}`);
+      
+        const regex = /,  /gi;
+        extractHtmlText = extractHtmlText.replace(regex, '&nbsp;');
+        
+       
+
+       
       }
     });
+
+   
     return extractHtmlText;
   }
 
   sendMessageToFooter(text) {
+
+   
     this.props.onChange({
       displayText: text,
       text: this.formatTextWithMentions(text),
@@ -552,8 +566,8 @@ export class Editor extends React.Component {
       const height =
         Platform.OS === "ios"
           ? evt.contentSize.height
-          : evt.contentSize.height - 11;
-      let editorHeight = Platform.OS === "ios" ? 20 : 40;
+          : evt.contentSize.height - 10;
+      let editorHeight = 20;
       editorHeight = editorHeight + height;
       this.setState({
         editorHeight
