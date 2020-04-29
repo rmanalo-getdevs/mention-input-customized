@@ -561,13 +561,14 @@ export class Editor extends React.Component {
      */
 
     if (evt) {
-      const androidTextHeight = 20;
+      const androidTextHeight = 5;
 
       const height =
         Platform.OS === "ios"
           ? evt.contentSize.height
-          : evt.contentSize.height - 10;
-      let editorHeight = 20;
+          : evt.contentSize.height -androidTextHeight ;
+      let editorHeight =  Platform.OS === "ios"
+      ?20:40;
       editorHeight = editorHeight + height;
       this.setState({
         editorHeight
@@ -651,7 +652,7 @@ export class Editor extends React.Component {
                         editorStyles.inputMaskTextWrapper
                       ]
                     : [
-                        styles.formmatedTextWrapper,
+                        styles.androidFormmatedTextWrapper,
                         editorStyles.inputMaskTextWrapper
                       ]
                 }
@@ -678,7 +679,7 @@ export class Editor extends React.Component {
                 style={
                   Platform.OS === "ios"
                     ? [styles.input, editorStyles.input, { height: "100%" }]
-                    : [styles.input, editorStyles.input, { height: "100%" }]
+                    : [styles.androidInput, editorStyles.input, { height: "100%" }]
                 }
                 multiline
                 textAlignVertical="top"

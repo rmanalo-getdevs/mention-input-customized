@@ -43,16 +43,16 @@ export default StyleSheet.create({
     top: 0,
     color: "transparent",
     alignSelf: "stretch",
-    width: "100%"
+    width: "100%",
+    textAlignVertical: "top"
   },
   androidFormmatedTextWrapper: {
     position: "absolute",
     top: 0,
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 10,
     width: "100%",
     height: "100%"
-    // marginTop:-15
   },
   formmatedText: {
     fontSize: 16,
